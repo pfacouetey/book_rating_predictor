@@ -1,0 +1,5 @@
+[core]
+    remote = myremote1
+['remote "myremote1"']
+    url = s3://book-rating-predictor
+    profile = dvc
