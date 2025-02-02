@@ -1,0 +1,5 @@
+outs:
+- md5: 948e8433d898eb4330d602e8e80fd915
+  size: 1339709
+  hash: md5
+  path: scraping_progress.csv
