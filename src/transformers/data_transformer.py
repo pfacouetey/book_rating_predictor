@@ -261,14 +261,27 @@ async def transform_books_dataset(
     cleaned_books_df.fillna(value=0, inplace=True)
     cleaned_books_df.drop_duplicates(inplace=True)
 
+    logging.info("Converting average_rating into a categorical variable...")
+    threshold = cleaned_books_df["average_rating"].mean()
+    cleaned_books_df["average_rating_category"] = cleaned_books_df["average_rating"].apply(
+        lambda x: "low" if x <= threshold else "high"
+    )
+    cleaned_books_df.drop(columns=["average_rating"], inplace=True)
+
     logging.info("Splitting data into training, and test sets...")
-    target_df = cleaned_books_df[["average_rating"]]
-    features_df = cleaned_books_df[cleaned_books_df.columns.drop("average_rating")]
+    target_df = cleaned_books_df[["average_rating_category"]]
+    features_df = cleaned_books_df[cleaned_books_df.columns.drop("average_rating_category")]
     train_features_df, test_features_df, train_target_df, test_target_df = train_test_split(
         features_df, target_df,
         test_size=TEST_SIZE,
         random_state=123,
         )
+
+    logging.info("Removing features with no variation or zero standard deviation...")
+    mask_train = (train_features_df.nunique() > 1) & (train_features_df.std() >= 0.8)
+    train_features_df = train_features_df.loc[:, mask_train]
+    train_features_names = train_features_df.columns.tolist()
+    test_features_df = test_features_df[train_features_names]
 
     logging.info("Adding Gaussian noise to training set...")
     noisy_train_features_df = add_gaussian_noise(features_df=train_features_df)

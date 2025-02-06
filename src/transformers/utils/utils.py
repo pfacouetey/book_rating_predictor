@@ -7,10 +7,7 @@ import asyncio
 import aiohttp
 import numpy as np
 import pandas as pd
-nltk.download("punkt")
 from pathlib import Path
-nltk.download("stopwords")
-nltk.download("punkt_tab")
 from fuzzywuzzy import fuzz
 from bs4 import BeautifulSoup
 from fuzzywuzzy import process
@@ -18,8 +15,11 @@ from nltk import word_tokenize
 from nltk.corpus import stopwords
 from typing import Optional, List
 from aiohttp import ClientTimeout
+nltk.download("punkt", quiet=True)
 from circuitbreaker import circuit
 from aiolimiter import AsyncLimiter
+nltk.download("stopwords", quiet=True)
+nltk.download("punkt_tab", quiet=True)
 from sentence_transformers import SentenceTransformer
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_result
 
