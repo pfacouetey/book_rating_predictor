@@ -14,7 +14,6 @@ def load_original_books_dataset() -> pd.DataFrame|None:
         or `None` if the dataset fails to load.
     :rtype: pd.DataFrame | None
     """
-
     books_csv_path = Path(__file__).parent.parent.parent / "data" / "books.csv"
     books_df = pd.read_csv(filepath_or_buffer=books_csv_path, dtype=str)
 
