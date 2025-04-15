@@ -47,7 +47,6 @@ def is_missing(data: dict[str, any]) -> bool:
     Returns:
         bool: True if all values are missing, False otherwise.
     """
-
     if not isinstance(data, dict):
         raise ValueError("Input data must be a dictionary.")
 
@@ -114,7 +113,6 @@ async def book_scraper(
         asyncio.TimeoutError: If the request times out.
         Exception: If any other unexpected error occurs during the request.
     """
-
     book_info = {"isbn13": isbn,}
     urls = [
         f"{OPEN_LIBRARY_URL}/api/books?bibkeys=ISBN:{isbn}&jscmd=data&format=json",
@@ -227,7 +225,6 @@ async def publisher_scraper(
         asyncio.TimeoutError: If the request times out.
         Exception: If any other unexpected error occurs during the request.
     """
-
     if publisher.strip() == "":
         return None
 
@@ -278,7 +275,6 @@ async def process_batch(
         asyncio.TimeoutError: If any of the requests times out.
         Exception: If any other unexpected error occurs during the requests.
     """
-
     tasks = []
 
     if len(isbns_to_process) > 0 and len(publishers_to_process) == 0 and len(authors_to_process) == 0:
@@ -306,7 +302,6 @@ def save_progress(
     Args:
         results (List[pd.DataFrame]): The list of DataFrames containing scraped books information.
     """
-
     if isinstance(results, List) and len(results) > 0:
 
         results_df = pd.concat(results, ignore_index=True)
@@ -331,7 +326,6 @@ def load_progress():
     Returns:
         Tuple[set[str], pd.DataFrame]: A tuple containing the set of processed ISBNs and the loaded DataFrame.
     """
-
     if os.path.exists(SCRAPING_FILENAME):
 
         with open(SCRAPING_FILENAME, "rb") as file:
@@ -356,7 +350,6 @@ def text_cleaner(raw_text: str) -> str:
     Returns:
         str: The cleaned text.
     """
-
     tokens = word_tokenize(re.sub(r"[^\w\s]", "", raw_text).lower())
     cleaned_text = [word for word in tokens if word.lower() not in STOP_WORDS]
     return " ".join(cleaned_text)
@@ -377,7 +370,6 @@ def publisher_matcher(
     Returns:
         List[str]: The best matched choices for the cleaned publisher name.
     """
-
     best_choices_for_publisher = [cleaned_publisher]
 
     for scorer in [fuzz.token_sort_ratio, fuzz.partial_ratio, fuzz.ratio]:
@@ -404,7 +396,6 @@ def subject_matcher(
     Returns:
         pd.DataFrame: A DataFrame containing the similarity scores between the subjects.
     """
-
     sentences = [subject.replace("unknown", "") for subject in subjects]
     non_empty_sentences = [sentence for sentence in sentences if sentence]
     non_empty_embeddings = HUGGING_FACE_MODEL.encode(sentences=non_empty_sentences, show_progress_bar=True)
@@ -449,7 +440,6 @@ def add_gaussian_noise(
         This function does not explicitly raise any errors, but unexpected issues
         could arise due to DataFrame processing or noise generation.
     """
-
     if features_df.empty:
         logging.warning("No features to add Gaussian noise to.")
         return None

@@ -44,7 +44,6 @@ async def transform_books_dataset(
     Raises:
         ValueError: If `books_df` is empty.
     """
-
     if books_df.empty:
         logging.error("Input books dataset is empty...")
         return None

@@ -15,7 +15,6 @@ def test_load_original_books_dataset():
 
     :return: None, as this is a test function that performs assertions directly.
     """
-
     books_df = load_original_books_dataset()
     try:
         OriginalBookSchema.validate(books_df)
