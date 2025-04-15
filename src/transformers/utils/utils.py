@@ -7,10 +7,7 @@ import asyncio
 import aiohttp
 import numpy as np
 import pandas as pd
-nltk.download("punkt")
 from pathlib import Path
-nltk.download("stopwords")
-nltk.download("punkt_tab")
 from fuzzywuzzy import fuzz
 from bs4 import BeautifulSoup
 from fuzzywuzzy import process
@@ -18,8 +15,11 @@ from nltk import word_tokenize
 from nltk.corpus import stopwords
 from typing import Optional, List
 from aiohttp import ClientTimeout
+nltk.download("punkt", quiet=True)
 from circuitbreaker import circuit
 from aiolimiter import AsyncLimiter
+nltk.download("stopwords", quiet=True)
+nltk.download("punkt_tab", quiet=True)
 from sentence_transformers import SentenceTransformer
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_result
 
@@ -29,6 +29,7 @@ HUGGING_FACE_MODEL = SentenceTransformer("all-MiniLM-L6-v2")
 STOP_WORDS = set(stopwords.words("english"))
 OPEN_LIBRARY_URL = "https://openlibrary.org"
 MAX_SCRAPING_ATTEMPTS = 2
+BOOK_RATING_THRESHOLD = 4 # It's being used to categorize average_rating values into 2 classes
 SAVE_INTERVAL = 1 # Save progress after processing each batch
 BATCH_SIZE = 200 # 200, 100 # Process no more than 100 books/publishers, and 200 authors by batch
 MAX_RETRIES = 10

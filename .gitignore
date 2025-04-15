@@ -169,3 +169,11 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+/.idea/codeStyles/codeStyleConfig.xml
+/qodana.yaml
+/.python-version
+
+
+# Mlflow local folders
+mlruns/
+mlartifacts/

@@ -5,6 +5,7 @@ description = "A machine learning project focused on predicting books quality."
 authors = ["Prince Foli Acouetey"]
 license = "MIT"
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "~3.11"
@@ -25,6 +26,8 @@ python-levenshtein = "^0.26.1"
 transformers = "^4.48.1"
 torch = { version = "^2.5.1", source = "torch" }
 sentence-transformers = "^3.4.0"
+hyperopt = "^0.2.7"
+imbalanced-learn = "^0.13.0"
 
 [[tool.poetry.source]]
 name = "torch"
