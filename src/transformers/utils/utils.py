@@ -8,9 +8,8 @@ import aiohttp
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from fuzzywuzzy import fuzz
+from fuzzywuzzy import fuzz, process
 from bs4 import BeautifulSoup
-from fuzzywuzzy import process
 from nltk import word_tokenize
 from nltk.corpus import stopwords
 from typing import Optional, List
