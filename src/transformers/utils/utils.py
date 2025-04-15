@@ -413,7 +413,7 @@ def subject_matcher(
 
     index_mapping = {
         old_index: new_index for new_index, old_index in enumerate(
-            [_index for _index, sentence in enumerate(sentences) if sentence])
+            _index for _index, sentence in enumerate(sentences) if sentence)
     }
     full_similarities = np.zeros((len(sentences), len(sentences)))
     for index1, sentence1 in enumerate(sentences):
