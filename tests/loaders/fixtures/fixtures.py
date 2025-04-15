@@ -2,9 +2,7 @@ import pandera as pa
 from pandera.typing import Series
 
 class OriginalBookSchema(pa.DataFrameModel):
-    """
-    A schema for the books' dataset.
-    """
+    """A schema for the books' dataset."""
 
     isbn13: Series[str]
     authors: Series[str]
