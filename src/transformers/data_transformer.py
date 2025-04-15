@@ -104,7 +104,6 @@ async def transform_books_dataset(
                 path_or_buf=Path(__file__).parent.parent.parent / "data" / scraped_csv,
                 index=False,
             )
-        del batches_results
 
     logging.info("Correcting books info...")
     numeric_cols = [
@@ -172,7 +171,6 @@ async def transform_books_dataset(
                 path_or_buf=Path(__file__).parent.parent.parent / "data" / scraped2_csv,
                 index=False,
             )
-        del batches_results
 
     publishers_results_df["cleaned_publisher"] = publishers_results_df["publisher"].apply(text_cleaner)
     publishers_results_df["books_count"] = publishers_results_df.groupby("cleaned_publisher")["books_count"].transform("mean")
@@ -234,7 +232,6 @@ async def transform_books_dataset(
                 path_or_buf=Path(__file__).parent.parent.parent / "data" / scraped3_csv,
                 index=False,
             )
-        del batches_results
 
     cleaned_books_df = cleaned_books_df.merge(
         right=authors_results_df, how="left", left_on="authors", right_on="author",
@@ -254,7 +251,6 @@ async def transform_books_dataset(
         ],
         inplace=True,
     )
-    del subjects_similarities_df, books_results_df, books_df, publishers_results_df, authors_results_df
     gc.collect()
 
     logging.info("Replacing any missing values by 0, and dropping duplicate rows...")
