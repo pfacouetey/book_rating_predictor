@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "book-rating-predictor"
-version = "0.1.0"
+version = "0.2.0"
 description = "A machine learning project focused on predicting books quality."
 authors = ["Prince Foli Acouetey"]
 license = "MIT"
