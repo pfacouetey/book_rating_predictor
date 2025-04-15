@@ -29,6 +29,7 @@ HUGGING_FACE_MODEL = SentenceTransformer("all-MiniLM-L6-v2")
 STOP_WORDS = set(stopwords.words("english"))
 OPEN_LIBRARY_URL = "https://openlibrary.org"
 MAX_SCRAPING_ATTEMPTS = 2
+BOOK_RATING_THRESHOLD = 4 # It's being used to categorize average_rating values into 2 classes
 SAVE_INTERVAL = 1 # Save progress after processing each batch
 BATCH_SIZE = 200 # 200, 100 # Process no more than 100 books/publishers, and 200 authors by batch
 MAX_RETRIES = 10

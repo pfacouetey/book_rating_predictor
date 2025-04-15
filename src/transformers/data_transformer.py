@@ -13,7 +13,7 @@ from sklearn.model_selection import train_test_split
 from src.transformers.utils.utils import (
     MAX_SCRAPING_ATTEMPTS, BATCH_SIZE, SAVE_INTERVAL,
     load_progress, process_batch, save_progress, text_cleaner, publisher_matcher, subject_matcher, SEED,
-    add_gaussian_noise, TEST_SIZE
+    add_gaussian_noise, TEST_SIZE, BOOK_RATING_THRESHOLD
 )
 
 SCRAPING_FILENAME = Path(__file__).parent.parent.parent / "data" / "scraping_progress.csv"
@@ -262,9 +262,8 @@ async def transform_books_dataset(
     cleaned_books_df.drop_duplicates(inplace=True)
 
     logging.info("Converting average_rating into a categorical variable...")
-    threshold = cleaned_books_df["average_rating"].mean()
     cleaned_books_df["average_rating_category"] = cleaned_books_df["average_rating"].apply(
-        lambda x: "low" if x <= threshold else "high"
+        lambda x: "low" if x <= BOOK_RATING_THRESHOLD else "high"
     )
     cleaned_books_df.drop(columns=["average_rating"], inplace=True)
 

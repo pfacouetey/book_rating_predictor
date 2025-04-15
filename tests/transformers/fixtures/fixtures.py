@@ -34,7 +34,7 @@ def expected_publisher_books_count_df(publisher):
     return pd.DataFrame(
         {
             "publisher": publisher,
-            "books_count": 181,
+            "books_count": 184,
         },
         index=[0],
     )
@@ -48,7 +48,7 @@ def expected_author_score_df(author):
     return pd.DataFrame(
         {
             "author": author,
-            "author_score": 411.0,
+            "author_score": 417.0,
         },
         index=[0],
     )
